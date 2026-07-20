@@ -1,0 +1,20 @@
+{
+  "course": "Sample Legal Theory Course",
+  "sources": [
+    {
+      "title": "Course syllabus",
+      "type": "Syllabus",
+      "status": "available"
+    },
+    {
+      "title": "Hart, The Concept of Law",
+      "type": "Academic article",
+      "status": "available"
+    },
+    {
+      "title": "Lecture 4 transcript",
+      "type": "Lecture transcript",
+      "status": "missing"
+    }
+  ]
+}

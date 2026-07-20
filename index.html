@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rambam LawSys Build Week Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">OPENAI BUILD WEEK · EDUCATION</p>
+    <h1>Rambam LawSys</h1>
+    <p class="tagline">Source-faithful AI for legal learning</p>
+    <p class="summary">
+      A controlled workflow that maps legal course materials before synthesis,
+      preserves provenance, and blocks unsupported completion.
+    </p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>1. Course intake</h2>
+      <p>Add the sources that should be present in the course pack.</p>
+
+      <div class="form-grid">
+        <label>
+          Source title
+          <input id="source-title" type="text" placeholder="e.g. Hart, The Concept of Law">
+        </label>
+
+        <label>
+          Source type
+          <select id="source-type">
+            <option value="Judicial decision">Judicial decision</option>
+            <option value="Academic article">Academic article</option>
+            <option value="Lecture transcript">Lecture transcript</option>
+            <option value="Syllabus">Syllabus</option>
+            <option value="Exam material">Exam material</option>
+          </select>
+        </label>
+
+        <label>
+          Availability
+          <select id="source-status">
+            <option value="available">Available</option>
+            <option value="missing">Missing</option>
+            <option value="uncertain">Uncertain</option>
+          </select>
+        </label>
+      </div>
+
+      <button id="add-source" type="button">Add source</button>
+      <button id="load-sample" type="button" class="secondary">Load sample course</button>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="source-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>2. Controlled decision</h2>
+      <p>
+        Rambam LawSys checks the active source pack before allowing integrated
+        course synthesis.
+      </p>
+      <button id="evaluate" type="button">Evaluate readiness</button>
+      <button id="export-manifest" type="button" class="secondary">Export manifest</button>
+
+      <div id="decision" class="decision neutral" role="status" aria-live="polite">
+        Add or load sources, then evaluate readiness.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>3. Learning products</h2>
+      <div class="product-grid">
+        <article>
+          <h3>Study companion</h3>
+          <p>Integrated course notebook built only after source coverage is checked.</p>
+        </article>
+        <article>
+          <h3>Source briefs</h3>
+          <p>Case and article analysis that preserves attribution and limits.</p>
+        </article>
+        <article>
+          <h3>Exam practice</h3>
+          <p>Knowledge checks, issue spotting, answer frameworks and retrieval practice.</p>
+        </article>
+        <article>
+          <h3>Lecture companion</h3>
+          <p>Post-class learning products without automatic canonical updates.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel workflow">
+      <h2>System workflow</h2>
+      <img src="assets/rambam-lawsys-workflow.png" alt="Rambam LawSys workflow diagram">
+    </section>
+  </main>
+
+  <footer>
+    <p>Build Week demonstration repository. No confidential prompts or private course content are included.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
