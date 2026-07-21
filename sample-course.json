@@ -4,16 +4,31 @@
     {
       "title": "Course syllabus",
       "type": "Syllabus",
+      "requirement": "required",
       "status": "available"
     },
     {
       "title": "Hart, The Concept of Law",
       "type": "Academic article",
+      "requirement": "required",
+      "status": "available"
+    },
+    {
+      "title": "HART: The Concept of Law",
+      "type": "Academic article",
+      "requirement": "required",
       "status": "available"
     },
     {
       "title": "Lecture 4 transcript",
       "type": "Lecture transcript",
+      "requirement": "required",
+      "status": "missing"
+    },
+    {
+      "title": "Recommended comparative reading",
+      "type": "Academic article",
+      "requirement": "optional",
       "status": "missing"
     }
   ]

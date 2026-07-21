@@ -47,6 +47,14 @@
             <option value="uncertain">Uncertain</option>
           </select>
         </label>
+
+        <label>
+          Coverage role
+          <select id="source-requirement">
+            <option value="required">Required</option>
+            <option value="optional">Optional</option>
+          </select>
+        </label>
       </div>
 
       <button id="add-source" type="button">Add source</button>
@@ -58,6 +66,7 @@
             <tr>
               <th>Source</th>
               <th>Type</th>
+              <th>Coverage role</th>
               <th>Status</th>
               <th></th>
             </tr>
@@ -82,7 +91,56 @@
     </section>
 
     <section class="panel">
-      <h2>3. Learning products</h2>
+      <h2>3. Validation evidence</h2>
+      <p>The run manifest and defect register are regenerated for each evaluation.</p>
+
+      <div class="manifest-grid" aria-label="Run manifest">
+        <article>
+          <span>Run ID</span>
+          <strong id="manifest-run-id">Not generated</strong>
+        </article>
+        <article>
+          <span>Timestamp</span>
+          <strong id="manifest-timestamp">Not generated</strong>
+        </article>
+        <article>
+          <span>Source count</span>
+          <strong id="manifest-source-count">0</strong>
+        </article>
+        <article>
+          <span>Required-source coverage</span>
+          <strong id="manifest-coverage">Not evaluated</strong>
+        </article>
+        <article>
+          <span>Open defects</span>
+          <strong id="manifest-defects">0</strong>
+        </article>
+        <article>
+          <span>Readiness status</span>
+          <strong id="manifest-readiness">Not evaluated</strong>
+        </article>
+      </div>
+
+      <h3>Structured defect register</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Level</th>
+              <th>Sources</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="defect-table">
+            <tr><td colspan="4">No validation run has been generated.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>4. Learning products</h2>
       <div class="product-grid">
         <article>
           <h3>Study companion</h3>
@@ -105,7 +163,7 @@
 
     <section class="panel workflow">
       <h2>System workflow</h2>
-      <img src="assets/rambam-lawsys-workflow.png" alt="Rambam LawSys workflow diagram">
+      <img src="rambam-lawsys-workflow.png" alt="Rambam LawSys workflow diagram">
     </section>
   </main>
 
@@ -113,6 +171,7 @@
     <p>Build Week demonstration repository. No confidential prompts or private course content are included.</p>
   </footer>
 
+  <script src="validator.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

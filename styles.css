@@ -60,7 +60,7 @@ main {
   margin-top: 0;
 }
 
-.form-grid, .product-grid {
+.form-grid, .product-grid, .manifest-grid {
   display: grid;
   gap: 1rem;
 }
@@ -71,6 +71,36 @@ main {
 
 .product-grid {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.manifest-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin: 1rem 0 1.5rem;
+}
+
+.manifest-grid article {
+  min-width: 0;
+  padding: 1rem;
+  border-left: 4px solid #087f73;
+  border-radius: 10px;
+  background: #f1f7f9;
+}
+
+.manifest-grid span,
+.manifest-grid strong {
+  display: block;
+}
+
+.manifest-grid span {
+  margin-bottom: 0.25rem;
+  color: #506174;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.manifest-grid strong {
+  overflow-wrap: anywhere;
 }
 
 .product-grid article {
@@ -167,6 +197,28 @@ th, td {
 .decision.no-go {
   color: #741c25;
   background: #fee7ea;
+}
+
+.decision.review {
+  color: #684312;
+  background: #fff1cf;
+}
+
+.severity {
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.severity.blocking {
+  color: #9b1c2a;
+}
+
+.severity.review {
+  color: #805315;
+}
+
+.severity.warning {
+  color: #705b16;
 }
 
 .workflow img {

@@ -5,23 +5,57 @@
 
 ## What this repository contains
 
-This repository contains a public, non-confidential demonstration of the Rambam LawSys workflow. It shows how the system maps a legal course source pack, identifies missing or uncertain materials, and blocks premature synthesis.
+This repository contains a public, non-confidential demonstration of the Rambam LawSys workflow. The Source Coverage Validator maps a legal course source pack, records coverage defects, and prevents premature synthesis when required materials are missing or uncertain.
 
-The repository does **not** include private Custom GPT instructions, confidential knowledge files, copyrighted course readings, API keys, or personal student data.
+The repository does **not** include private Custom GPT instructions, confidential Knowledge files, copyrighted course readings, API keys, or personal student data.
 
-## Working demo
+## Source Coverage Validator
 
-Open `index.html` in a browser.
+Every source records four public metadata fields: title, source type, availability (`available`, `missing`, or `uncertain`), and coverage role (`required` or `optional`). The validator then:
 
-The demo allows a judge to:
+- detects duplicate entries by normalizing title case, punctuation, Unicode form, and whitespace, then combining the normalized title with the normalized source type;
+- creates structured defects for missing required sources, uncertain required sources, and duplicate source groups;
+- records missing or uncertain optional sources as non-blocking warnings;
+- calculates available required sources, total required sources, and coverage percentage; and
+- produces a visible and exportable run manifest with a run ID, timestamp, source count, required-source coverage, open defects, warnings, and readiness status.
 
-1. Add legal course sources.
-2. Classify each source by type.
-3. mark a source as available, missing, or uncertain.
-4. Evaluate whether the source pack may proceed to controlled synthesis.
-5. Export a JSON source manifest.
+Readiness uses explicit precedence:
 
-No installation or API key is required for this demonstration.
+1. `NO-GO` when the pack is empty or any required source is missing or uncertain.
+2. `REVIEW REQUIRED` when required coverage is complete but duplicate sources remain.
+3. `GO` when required coverage is complete and no duplicate groups remain. Optional-source warnings remain visible but do not block readiness.
+
+A `GO` result permits controlled synthesis to begin; it does not replace source-specific processing, attribution review, or product quality gates.
+
+## Run the demo
+
+No installation or API key is required for the browser demonstration.
+
+1. Open `index.html` in a modern browser.
+2. Select **Load sample course**.
+3. Select **Evaluate readiness**.
+4. Confirm the sample is `NO-GO`, with a missing required lecture, a duplicate Hart entry, and a missing optional-source warning.
+5. Remove the missing required lecture and one of the duplicate Hart entries.
+6. Evaluate again and confirm `GO` with 100% required-source coverage and one non-blocking warning.
+7. Select **Export manifest** to download the current validation run as JSON.
+
+The full manual walkthrough is also available in `manual-test.html`.
+
+## Run the automated tests
+
+The test suite uses the JavaScript runtime built into Node.js and has no package dependencies. Node.js 18 or newer is recommended.
+
+```sh
+npm test
+```
+
+Equivalent direct command:
+
+```sh
+node --test tests/validator.test.js
+```
+
+The suite covers title normalization, required-source blockers, optional warnings, duplicate detection, type-sensitive duplicate matching, readiness precedence, run-manifest fields, coverage calculation, and empty-pack behavior.
 
 ## Why Rambam LawSys
 
@@ -33,71 +67,46 @@ Core principles:
 - Source-type processing before integration
 - Separation of authority, interpretation, criticism, and uncertainty
 - No unsupported quotation or attribution
-- Completion veto for missing mandatory material
+- Completion veto for missing required material
 - Product-level quality gates
 - RTL-aware delivery for Hebrew legal education
 
-## How Codex was used during Build Week
+## How Codex accelerated the Build Week work
 
-This public demo repository is intended to be extended in the primary Codex build thread.
+Codex inspected the existing public demo, separated the validation rules into a reusable `validator.js` module, connected that module to the browser UI, added the structured defect register and run manifest, updated the sample data, and authored the automated tests. Codex ran and repaired the implementation against the test suite, then exercised the live browser flow to verify the NO-GO and GO states, visible audit evidence, and absence of browser errors.
 
-The final submission should replace this paragraph with a factual summary of the work actually completed in Codex, including:
+This accelerated implementation by keeping the rules, UI behavior, test expectations, documentation, and Build Week evidence aligned in one reviewable change. The substantive product decisions remain explicit in this repository and in `BUILD_WEEK_LOG.md`.
 
-- The core feature implemented or materially improved
-- Files created or changed by Codex
-- Tests or verification performed
-- Where Codex accelerated implementation
-- The product, engineering, or design decisions retained by the submitter
+## How GPT-5.6 supported the work
 
-Do not claim work that was not actually completed in Codex.
+GPT-5.6 supported the legal-learning architecture and implementation review by translating provenance-governance requirements into deterministic validation rules. Its contribution included failure-state analysis, readiness-precedence design, duplicate-normalization reasoning, structured defect semantics, audit-manifest design, test-case coverage, and review of the public demonstration for unsupported claims or private material.
 
-## How GPT-5.6 was used
-
-GPT-5.6 supported the legal-learning architecture, long-context reasoning, provenance controls, failure-state analysis, pedagogical product design, and review of the public demonstration.
-
-The final repository should identify the actual GPT-5.6 usage evidenced by the Codex build session and submission materials.
-
-## Suggested Codex Build Week extension
-
-A meaningful extension is to add:
-
-- A required/optional source field
-- Duplicate-source detection
-- A structured defect register
-- Automated validation tests
-- A visible run manifest
-- A README update documenting the implementation decisions
+GPT-5.6 did not supply private prompts, copyrighted course content, API keys, or confidential Knowledge files.
 
 ## Repository structure
 
 ```text
 .
-├── index.html
-├── styles.css
-├── app.js
-├── README.md
-├── LICENSE
-├── sample-data/
-├── docs/
-├── tests/
-└── assets/
+|-- app.js
+|-- BUILD_WEEK_LOG.md
+|-- index.html
+|-- LICENSE
+|-- manual-test.html
+|-- package.json
+|-- rambam-lawsys-workflow.png
+|-- README.md
+|-- sample-course.json
+|-- styles.css
+|-- validator.js
+`-- tests/
+    `-- validator.test.js
 ```
-
-## Test instructions
-
-1. Open `index.html`.
-2. Select **Load sample course**.
-3. Select **Evaluate readiness**.
-4. Confirm that the missing lecture causes a NO-GO decision.
-5. Remove the missing source or add it as available.
-6. Evaluate again.
-7. Export the manifest and inspect the JSON file.
 
 ## Build Week disclosure
 
-Rambam LawSys existed before Build Week as an evolving legal-learning methodology and controlled Custom GPT workflow. The submission must distinguish that pre-existing work from the specific repository implementation and extensions completed during the official submission period.
+Rambam LawSys existed before Build Week as an evolving legal-learning methodology and controlled Custom GPT workflow. The Source Coverage Validator implementation, automated tests, visible defect register, and run manifest documented here are the repository work completed during this Build Week implementation session.
 
-See `docs/BUILD_WEEK_LOG.md`.
+See `BUILD_WEEK_LOG.md` for the dated implementation record and verification evidence.
 
 ## License and rights
 

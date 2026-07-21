@@ -3,10 +3,13 @@
 <title>Manual test checklist</title>
 <h1>Rambam LawSys manual test checklist</h1>
 <ol>
-  <li>Open ../index.html.</li>
+  <li>Open index.html.</li>
   <li>Load the sample course.</li>
-  <li>Evaluate readiness and confirm NO-GO.</li>
-  <li>Remove the missing source.</li>
-  <li>Evaluate readiness and confirm GO.</li>
-  <li>Export the manifest and confirm valid JSON.</li>
+  <li>Evaluate readiness and confirm a NO-GO for the missing required lecture.</li>
+  <li>Confirm the duplicate Hart entries appear as a review defect.</li>
+  <li>Confirm the missing optional reading appears as a warning.</li>
+  <li>Confirm the visible run manifest has an ID, timestamp, counts, coverage, defects, and readiness.</li>
+  <li>Remove the missing required lecture and one duplicate entry.</li>
+  <li>Evaluate again and confirm GO with one non-blocking optional warning.</li>
+  <li>Export the manifest and confirm it is valid JSON matching the visible run.</li>
 </ol>

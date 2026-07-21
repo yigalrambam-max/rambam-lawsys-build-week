@@ -1,0 +1,9 @@
+{
+  "name": "rambam-lawsys-build-week",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Source Coverage Validator demonstration for Rambam LawSys",
+  "scripts": {
+    "test": "node --test tests/validator.test.js"
+  }
+}
